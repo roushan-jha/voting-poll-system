@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Poll } from './poll.models';
+import { CreatePollRequest, Poll } from './poll.models';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -16,7 +16,11 @@ export class PollService {
     return this.http.get<Poll[]>(this.apiUrl);
   }
 
-  createPoll(poll: Poll): Observable<Poll> {
+  // createPoll(poll: Poll): Observable<Poll> {
+  //   return this.http.post<Poll>(this.apiUrl, poll);
+  // }
+
+  createPoll(poll: CreatePollRequest): Observable<Poll> {
     return this.http.post<Poll>(this.apiUrl, poll);
   }
 

@@ -1,5 +1,10 @@
 <div class="container py-4">
-  <h2 class="text-center mb-4 fw-semibold border border-primary py-2 rounded-pill">MyVote | Voting Poll System</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-semibold py-2 px-3 mb-0">MyVote | Voting Poll System</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPollModal">
+      + Create Poll
+    </button>
+  </div>
 
   <div *ngIf="polls.length === 0" class="text-center text-muted py-5">
     No polls available yet.
@@ -21,6 +26,45 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Poll Modal -->
+<div class="modal fade" id="createPollModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create a New Poll</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Question</label>
+          <input type="text" class="form-control" [(ngModel)]="newPoll.question" placeholder="Enter poll question" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Number of Options</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="optionCount"
+            (ngModelChange)="onOptionCountChange()"
+            min="2"
+            max="10"
+          />
+        </div>
+
+        <div class="mb-2" *ngFor="let option of newPoll.options; let i = index; trackBy: trackByIndex">
+          <label class="form-label">Option {{ i + 1 }}</label>
+          <input type="text" class="form-control" [(ngModel)]="newPoll.options[i]" placeholder="Option {{ i + 1 }} text" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="createPoll()">Create</button>
       </div>
     </div>
   </div>

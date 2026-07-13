@@ -8,3 +8,12 @@ export interface OptionVote {
     optionText: string;
     voteCount: number;
 }
+
+export interface CreatePollRequest {
+    question: string;
+    options: CreateOptionRequest[];
+}
+
+export interface CreateOptionRequest {
+    optionText: string;
+}
