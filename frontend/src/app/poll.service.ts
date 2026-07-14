@@ -27,4 +27,8 @@ export class PollService {
   vote(pollId : number, optionIndex : number): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/vote`, { pollId, optionIndex });
   }
+
+  deletePoll(pollId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${pollId}`);
+  }
 }

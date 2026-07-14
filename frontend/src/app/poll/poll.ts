@@ -90,6 +90,17 @@ export class PollComponent implements OnInit {
     });
   }
 
+  deletePoll(pollId: number) {
+    if (!confirm('Are you sure you want to delete this poll?')) return;
+
+    this.pollService.deletePoll(pollId).subscribe({
+      next: () => {
+        this.polls.update(polls => polls.filter(p => p.id !== pollId));
+      },
+      error: (error) => console.log('Error deleting poll!!', error)
+    });
+  }
+
   trackByPollId(index: number, poll: Poll): number {
     return poll.id;
   }
