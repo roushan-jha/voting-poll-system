@@ -53,4 +53,12 @@ public class PollService {
         // save to DB
         pollRepository.save(poll);
     }
+
+    public boolean deletePoll(Long id) {
+        if (!pollRepository.existsById(id)) {
+            return false;
+        }
+        pollRepository.deleteById(id);
+        return true;
+    }
 }
